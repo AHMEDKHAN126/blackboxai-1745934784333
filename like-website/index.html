@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Like Button Website</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .like-button {
+      transition: color 0.3s ease;
+    }
+    .like-button.liked {
+      color: #ef4444; /* Tailwind red-500 */
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+  <main class="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full text-center">
+    <h1 class="text-3xl font-semibold mb-6">Like This Page</h1>
+    <button id="likeBtn" aria-pressed="false" aria-label="Like button" class="like-button text-gray-400 text-6xl focus:outline-none focus:ring-4 focus:ring-red-300 rounded-full">
+      <i class="far fa-heart"></i>
+    </button>
+    <p id="likeCount" class="mt-4 text-xl font-medium text-gray-700">0 Likes</p>
+  </main>
+
+  <script>
+    const likeBtn = document.getElementById('likeBtn');
+    const likeCount = document.getElementById('likeCount');
+    let liked = false;
+    let count = 0;
+
+    likeBtn.addEventListener('click', () => {
+      liked = !liked;
+      if (liked) {
+        count++;
+        likeBtn.classList.add('liked');
+        likeBtn.innerHTML = '<i class="fas fa-heart"></i>';
+        likeBtn.setAttribute('aria-pressed', 'true');
+      } else {
+        count = count > 0 ? count - 1 : 0;
+        likeBtn.classList.remove('liked');
+        likeBtn.innerHTML = '<i class="far fa-heart"></i>';
+        likeBtn.setAttribute('aria-pressed', 'false');
+      }
+      likeCount.textContent = count + (count === 1 ? ' Like' : ' Likes');
+    });
+  </script>
+</body>
+</html>
